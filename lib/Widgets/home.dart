@@ -17,7 +17,7 @@ class HomeState extends State<Home> {
             floatingActionButton: new FloatingActionButton(
                 child: new Icon(Icons.person_add),
                 onPressed: () {               
-                    print("FloatButton pressed");
+                    print("FloatButton");
                 },
             ),
             bottomNavigationBar: new BottomNavigationBar(
