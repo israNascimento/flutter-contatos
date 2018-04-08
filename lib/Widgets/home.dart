@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_contatos/Widgets/contactDetail.dart';
 import 'package:flutter_contatos/Widgets/list.dart';
 
 class Home extends StatefulWidget {
-    @override
+    @override   
     createState() => new HomeState();
 }
 
@@ -11,12 +12,13 @@ class HomeState extends State<Home> {
     Widget build(BuildContext context) {
         return new Scaffold(
             appBar: new AppBar(
-                title: new Text("Contatos"),
+                title: new Text("Lista de contatos"),
             ),
             body: new ContactList(),
             floatingActionButton: new FloatingActionButton(
                 child: new Icon(Icons.person_add),
-                onPressed: () {               
+                onPressed: () {
+                    _goToContact();
                     print("FloatButton");
                 },
             ),
@@ -33,5 +35,11 @@ class HomeState extends State<Home> {
                 ]
             ),
         );
+    }
+
+    void _goToContact() {
+        Navigator.push(context, new MaterialPageRoute(
+            builder: (context) => new Detail()
+        ));
     }
 }
