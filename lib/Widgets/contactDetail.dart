@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:flutter_contatos/Models/contact.dart';
+import 'package:flutter_contatos/Infra/connection.dart';
 
 class Detail extends StatelessWidget {
     Contact _contact;
@@ -49,7 +51,7 @@ class Detail extends StatelessWidget {
         );
     }
 
-    void _addContact() {
+    void _addContact() async {
         if(_contact == null) {
             _contact = new Contact(_controllerName.text, _controllerName.text, _controllerEmail.text);
         } else {
@@ -57,6 +59,7 @@ class Detail extends StatelessWidget {
             _contact.email = _controllerEmail.text;
             _contact.phone = _controllerTel.text;            
         }
-        print(_contact.name);
+        Database db = await Connection.openConnection();
+        print("${_contact.name} +++++ $db");
     }
 }
