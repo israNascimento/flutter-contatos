@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_contatos/Models/contact.dart';
+import 'package:flutter_contatos/Widgets/contactDetail.dart';
 
 class ContactList extends StatefulWidget {
     @override
@@ -6,14 +8,14 @@ class ContactList extends StatefulWidget {
 }
 
 class ContactState extends State<ContactList>{
-    List<String> _test = new List<String>();
+    List<Contact> _contacts = new List<Contact>();
 
     ContactState() {
-        _test.add("Hello");
-        _test.add("World!");
-        _test.add("My name");
-        _test.add("Is");
-        _test.add("Israel");
+        _contacts.add(new Contact("Israel", "12345678", "israelnascimento@gmail.com"));
+        _contacts.add(new Contact("Isaac", "542364", "isaac@gmail.com"));
+        _contacts.add(new Contact("Michele", "98521452", "michele.a@gl.com"));
+        _contacts.add(new Contact("Benilson", "9854515", "bene@yahoo.com.br"));
+        _contacts.add(new Contact("Tamires", "12241251", "Tamires@gmail.com"));
     }
 
     @override
@@ -24,19 +26,21 @@ class ContactState extends State<ContactList>{
     Widget contactList() {
         return new Container(
             child: new ListView.builder(
-                itemCount: _test.length,
+                itemCount: _contacts.length,
                 itemBuilder: (context, i) {
-                    return _buildTile(_test[i]); 
-                }, 
-            ) 
+                    return _buildTile(_contacts[i]); 
+                },
+            )
         );
     }
 
-    Widget _buildTile(String element) {
+    Widget _buildTile(Contact element) {
         return new ListTile(
-            title: new Text("$element"), 
+            title: new Text("${element.name}"), 
             onTap: () {
-                _test.add("Benemiche ${(_test.length)}");
+                Navigator.push(context, new MaterialPageRoute(
+                    builder: (context) => new Detail(contact: element,)
+                ));
             }
         );
     }
